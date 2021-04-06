@@ -1,5 +1,5 @@
 {
-  "name": "michaeldegroot/doctrine-encrypt-bundle",
+  "name": "jaszfalvitamas/doctrine-encrypt-bundle",
   "type": "library",
   "keywords": ["doctrine", "symfony", "halite", "defuse", "encrypt", "decrypt"],
   "license": "MIT",
@@ -28,11 +28,5 @@
   },
   "autoload-dev": {
     "psr-4": { "Ambta\\DoctrineEncryptBundle\\Tests\\": "Tests/" }
-  },
-  "authors": [
-    {
-      "name": "GiveMeAllYourCats",
-      "email": "specamps@gmail.com"
-    }
-  ]
+  }
 }
