@@ -8,7 +8,7 @@ use Ambta\DoctrineEncryptBundle\DependencyInjection\DoctrineEncryptExtension;
 
 class AmbtaDoctrineEncryptBundle extends Bundle
 {
-    public function getContainerExtension(): ?ExtensionInterface
+    public function getContainerExtension(): ExtensionInterface
     {
         return new DoctrineEncryptExtension();
     }
