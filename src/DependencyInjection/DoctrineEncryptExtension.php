@@ -24,7 +24,7 @@ class DoctrineEncryptExtension extends Extension
     /**
      * {@inheritDoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         // Create configuration object
         $configuration = new Configuration();
