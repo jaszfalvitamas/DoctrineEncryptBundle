@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Ambta\DoctrineEncryptBundle\DependencyInjection;
 
@@ -6,6 +7,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
+use Ambta\DoctrineEncryptBundle\Encryptors\DefuseEncryptor;
+use Ambta\DoctrineEncryptBundle\Encryptors\HaliteEncryptor;
 
 /**
  * Initialization of bundle.
@@ -16,13 +19,14 @@ use Symfony\Component\DependencyInjection\Loader;
  */
 class DoctrineEncryptExtension extends Extension
 {
-    const SupportedEncryptorClasses = array(
-        'Defuse' => 'Ambta\DoctrineEncryptBundle\Encryptors\DefuseEncryptor',
-        'Halite' => 'Ambta\DoctrineEncryptBundle\Encryptors\HaliteEncryptor',
-    );
+    public const SupportedEncryptorClasses = [
+        'Defuse' => DefuseEncryptor::class,
+        'Halite' => HaliteEncryptor::class,
+    ];
 
     /**
      * {@inheritDoc}
+     * @throws \Exception
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -31,7 +35,7 @@ class DoctrineEncryptExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         // If empty encryptor class, use Halite encryptor
-        if (in_array($config['encryptor_class'], array_keys(self::SupportedEncryptorClasses))) {
+        if (\array_key_exists($config['encryptor_class'], self::SupportedEncryptorClasses)) {
             $config['encryptor_class_full'] = self::SupportedEncryptorClasses[$config['encryptor_class']];
         } else {
             $config['encryptor_class_full'] = $config['encryptor_class'];
